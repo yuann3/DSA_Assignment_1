@@ -86,31 +86,49 @@ T LinkedList<T>::pop_back()
 template <typename T>
 T LinkedList<T>::remove()
 {
-	
+	if (empty() || current == head || current == tail) throw empty_collection_exception();
+	Node<T>* toDelete = current;
+	T data = toDelete->get_data();
+	toDelete->get_prev()->set_next(toDelete->get_next());
+	toDelete->get_next()->set_prev(toDelete->get_prev());
+	current = toDelete->get_next();
+	delete toDelete;
+	count--;
+	return data;
 }
 
 template <typename T>
 void LinkedList<T>::clear()
 {
-
+	Node<T>* iter = head->get_next();
+	while (iter != tail) {
+		Node<T>* toDelete = iter;
+		iter = iter->get_next();
+		delete;
+	}
+	head->set_next(tail);
+	tail->set_prev(head);
+	count = 0;
 }
 
 template <typename T>
 T& LinkedList<T>::front() const
 {
-
+	if (empty()) throw empty_collection_exception();
+	return head->get_next()->get_data();
 }
 
 template <typename T>
 T& LinkedList<T>::back() const
 {
-
+	if (empty()) throw empty_collection_exception();
+	return tail->get_prev()->get_data();
 }
 
 template <typename T>
 T& LinkedList<T>::get_current() const
 {
-
+	
 }
 
 
