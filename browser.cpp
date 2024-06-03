@@ -65,10 +65,16 @@ int Browser::remove(std::string url)
 void Browser::bookmark_current()
 {
     std::string currentSite = get_current_site();
-    if (bookmarks->search(currentSite)) // if the current site is already bookmarked
+    // if the current site is already bookmarked
+    if (bookmarks->search(currentSite)){
         bookmarks->remove(); // remove it
+        std::cout << currentSite << " removed from bookmarks." << std::endl;
+    }
     else
+    {
         bookmarks->push_back(currentSite); // otherwise, add it
+        std::cout << "added " << currentSite << " to bookmarke." << std::endl;
+    }
 }
 
 // clear all history, and back to homepage
@@ -84,11 +90,20 @@ void Browser::print_bookmarks()
     if (bookmarks->empty()) // if there are no bookmarks
     {
         std::cout << "No bookmarke in the list" << std::endl;
-        return;
     }
-    bookmarks->begin(); // start at the beginning
-    while (bookmarks->get_current() != bookmarks->back())
-        std::cout << bookmarks->get_current() << std::endl; // print the current site
+    else
+    {
+        bookmarks->begin();
+        std::cout << "Bookmark List:" << std::endl;
+        while (bookmarks->get_current() != bookmarks->back())
+        {
+            std::cout << bookmarks->get_current() << std::endl;
+            bookmarks->forward();
+        }
+        // print the last bookmark
+        std::cout << bookmarks->get_current() << std::endl;
+    }
+    
 }
 
 // return the number of sites in the history

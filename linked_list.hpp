@@ -106,7 +106,7 @@ void LinkedList<T>::clear()
 	{
 		Node<T>* toDelete = iter;
 		iter = iter->get_next();
-		delete;
+		delete toDelete;
 	}
 	head->set_next(tail);
 	tail->set_prev(head);
