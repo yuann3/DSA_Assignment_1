@@ -1,11 +1,8 @@
 /*
-* LinkedList.hpp
-* Written by : SENG1120 Staff (c1234567)
-* Modified   : 03/08/2023
-*
-* This class represents the template implementation for a LinkedList class.
-* This file should be used in conjunction with Assignment 1 for SENG1120.
-*/
+ * LinkedList.hpp
+ * Written by : Yiyuan Li
+ * Modified   : 03/06/2024
+ */
 
 #include "empty_collection_exception.h"
 template <typename T>
@@ -25,9 +22,9 @@ LinkedList<T>::~LinkedList()
 }
 
 template <typename T>
-void LinkedList<T>::push_front(const T& data)
+void LinkedList<T>::push_front(const T &data)
 {
-	Node<T>* newNode = new Node<T>(data);
+	Node<T> *newNode = new Node<T>(data);
 	newNode->set_next(head->get_next());
 	newNode->set_prev(head);
 	head->get_next()->set_prev(newNode);
@@ -36,9 +33,9 @@ void LinkedList<T>::push_front(const T& data)
 }
 
 template <typename T>
-void LinkedList<T>::push_back(const T& data)
+void LinkedList<T>::push_back(const T &data)
 {
-	Node<T>* newNode = new Node<T>(data);
+	Node<T> *newNode = new Node<T>(data);
 	newNode->set_next(tail);
 	newNode->set_prev(tail->get_prev());
 	tail->get_prev()->set_next(newNode);
@@ -47,9 +44,10 @@ void LinkedList<T>::push_back(const T& data)
 }
 
 template <typename T>
-void LinkedList<T>::insert(const T& data)
+void LinkedList<T>::insert(const T &data)
 {
-	if (current == tail) return;
+	if (current == tail)
+		return;
 	Node<T> newNode = new Node<T>(data);
 	newNode->set_next(current->get_next());
 	newNode->set_prev(current);
@@ -61,8 +59,9 @@ void LinkedList<T>::insert(const T& data)
 template <typename T>
 T LinkedList<T>::pop_front()
 {
-	if (empty()) throw empty_collection_exception();
-	Node<T>* toDelete = head->get_next();
+	if (empty())
+		throw empty_collection_exception();
+	Node<T> *toDelete = head->get_next();
 	T data = toDelete->get_data();
 	tail->set_prev(toDelete->get_prev());
 	toDelete->get_next()->set_prev(head);
@@ -74,8 +73,9 @@ T LinkedList<T>::pop_front()
 template <typename T>
 T LinkedList<T>::pop_back()
 {
-	if (empty()) throw empty_collection_exception();
-	Node<T>* toDelete = tail->get_prev();
+	if (empty())
+		throw empty_collection_exception();
+	Node<T> *toDelete = tail->get_prev();
 	T data = toDelete->get_data();
 	tail->set_prev(toDelete->get_prev());
 	toDelete->get_prev()->set_next(tail);
@@ -87,8 +87,9 @@ T LinkedList<T>::pop_back()
 template <typename T>
 T LinkedList<T>::remove()
 {
-	if (empty() || current == head || current == tail) throw empty_collection_exception();
-	Node<T>* toDelete = current;
+	if (empty() || current == head || current == tail)
+		throw empty_collection_exception();
+	Node<T> *toDelete = current;
 	T data = toDelete->get_data();
 	toDelete->get_prev()->set_next(toDelete->get_next());
 	toDelete->get_next()->set_prev(toDelete->get_prev());
@@ -101,10 +102,10 @@ T LinkedList<T>::remove()
 template <typename T>
 void LinkedList<T>::clear()
 {
-	Node<T>* iter = head->get_next();
+	Node<T> *iter = head->get_next();
 	while (iter != tail)
 	{
-		Node<T>* toDelete = iter;
+		Node<T> *toDelete = iter;
 		iter = iter->get_next();
 		delete toDelete;
 	}
@@ -114,42 +115,45 @@ void LinkedList<T>::clear()
 }
 
 template <typename T>
-T& LinkedList<T>::front() const
+T &LinkedList<T>::front() const
 {
-	if (empty()) throw empty_collection_exception();
+	if (empty())
+		throw empty_collection_exception();
 	return head->get_next()->get_data();
 }
 
 template <typename T>
-T& LinkedList<T>::back() const
+T &LinkedList<T>::back() const
 {
-	if (empty()) throw empty_collection_exception();
+	if (empty())
+		throw empty_collection_exception();
 	return tail->get_prev()->get_data();
 }
 
 template <typename T>
-T& LinkedList<T>::get_current() const
+T &LinkedList<T>::get_current() const
 {
-	if (empty() || current == head || current == tail) throw empty_collection_exception();
+	if (empty() || current == head || current == tail)
+		throw empty_collection_exception();
 	return current->get_data();
 }
 
 template <typename T>
 void LinkedList<T>::begin()
 {
-  current = head->get_next();
+	current = head->get_next();
 }
 
 template <typename T>
 void LinkedList<T>::end()
 {
-  current = tail->get_prev();
+	current = tail->get_prev();
 }
 
 template <typename T>
 void LinkedList<T>::forward()
 {
-  if (current != tail && current->get_next() != tail) 
+	if (current != tail && current->get_next() != tail)
 		current = current->get_next();
 }
 
@@ -173,9 +177,9 @@ bool LinkedList<T>::empty() const
 }
 
 template <typename T>
-bool LinkedList<T>::search(const T& target)
+bool LinkedList<T>::search(const T &target)
 {
-	Node<T>* node = head->get_next();
+	Node<T> *node = head->get_next();
 	while (node != tail)
 	{
 		if (node->get_data() == target)
@@ -185,6 +189,6 @@ bool LinkedList<T>::search(const T& target)
 		}
 		node = node->get_next();
 	}
-	
+
 	return false;
 }
