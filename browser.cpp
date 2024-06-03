@@ -8,12 +8,12 @@
 
 // This is a constructor: it initializes the browser with a homepage and a history limit
 Browser::Browser(const std::string &homepage, int history_limit)
-    : history(new LinkedList<std::string>()),
-      bookmarks(new LinkedList<std::string>()),
-      history_limit(history_limit),
-      homepage(homepage)
+		: history(new LinkedList<std::string>()),
+			bookmarks(new LinkedList<std::string>()),
+			history_limit(history_limit),
+			homepage(homepage)
 {
-    visit(homepage); // start with the homepage in the history
+	visit(homepage); // start with the homepage in the history
 }
 
 Browser::~Browser()
@@ -88,16 +88,15 @@ int Browser::remove(std::string url)
 void Browser::bookmark_current()
 {
 	std::string currentSite = get_current_site();
-	// If the current site is already bookmarked
+	// Search for the current site in the bookmarks to see if it's already bookmarked
 	if (bookmarks->search(currentSite))
 	{
-		bookmarks->remove(); // Remove it
-		std::cout << currentSite << " removed from bookmarks." << std::endl;
+		std::cout << currentSite << " is already bookmarked. No action taken." << std::endl;
 	}
 	else
 	{
-		bookmarks->push_back(currentSite); // Otherwise, add it
-		std::cout << "added " << currentSite << " to bookmark." << std::endl;
+		bookmarks->push_back(currentSite); // Add to bookmarks if not already bookmarked
+		std::cout << "Added " << currentSite << " to bookmarks." << std::endl;
 	}
 }
 
@@ -113,24 +112,21 @@ void Browser::print_bookmarks()
 {
 	if (bookmarks->empty())
 	{
-		// If there are no bookmarks
-		std::cout << "No bookmarks in the list" << std::endl;
+		std::cout << "Bookmark list is empty." << std::endl;
 	}
 	else
 	{
-		bookmarks->begin();
+		bookmarks->begin(); // Start at the first bookmark
 		std::cout << "Bookmark List:" << std::endl;
-		do
+		while (true)
 		{
-			// Print the current bookmark
 			std::cout << bookmarks->get_current() << std::endl;
-			// Move to the next bookmark
 			bookmarks->forward();
-			// loop until we reach the last bookmark
-		} while (bookmarks->get_current() != bookmarks->back());
-		// Print the last bookmark
-		if (bookmarks->get_current() == bookmarks->back())
-			std::cout << bookmarks->get_current() << std::endl;
+			if (bookmarks->get_current() == bookmarks->back())
+			{ // Check if we've reached the end
+				break;
+			}
+		}
 	}
 }
 
