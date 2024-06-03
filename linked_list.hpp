@@ -134,7 +134,6 @@ T& LinkedList<T>::get_current() const
 	return current->get_data();
 }
 
-
 template <typename T>
 void LinkedList<T>::begin()
 {
@@ -150,13 +149,15 @@ void LinkedList<T>::end()
 template <typename T>
 void LinkedList<T>::forward()
 {
-  if (current != tail && current->get_next() != tail) current = current->get_next();
+  if (current != tail && current->get_next() != tail) 
+		current = current->get_next();
 }
 
 template <typename T>
 void LinkedList<T>::backward()
 {
-  if (current != head && current->get_prev() != head) current = current->get_prev();
+	if (current != head->get_next())
+		current = current->get_prev();
 }
 
 template <typename T>
