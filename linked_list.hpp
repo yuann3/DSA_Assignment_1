@@ -87,7 +87,7 @@ T LinkedList<T>::pop_back()
 template <typename T>
 T LinkedList<T>::remove()
 {
-	if (empty())
+	if (empty() || current == head || current == tail)
 		throw empty_collection_exception();
 	Node<T> *toDelete = current;
 	T data = toDelete->get_data();

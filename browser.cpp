@@ -28,7 +28,7 @@ const std::string &Browser::get_current_site()
 	if (history->empty())
 		return homepage;
 	else
-		return history->get_current(); // Return the current site
+		return history->back(); // Return the current site
 }
 
 // Visit a new URL
