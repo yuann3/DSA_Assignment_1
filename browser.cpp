@@ -31,6 +31,8 @@ const std::string &Browser::get_current_site()
 	// If history is empty, return the homepage
 	if (history->empty())
 		return homepage;
+	else if (history->size() > 2)
+		return history->back();
 	else
 		return history->get_current(); // Return the current site from the history
 }
