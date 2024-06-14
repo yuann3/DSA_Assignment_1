@@ -93,6 +93,7 @@ int Browser::remove(std::string url)
 		history->remove();
 		count++; // Increment count of removed URLs
 	}
+	history->end(); // Reset current to the beginning of the list
 	return count; // Return the number of removed URLs
 }
 
