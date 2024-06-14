@@ -209,8 +209,8 @@ void LinkedList<T>::forward()
 template <typename T>
 void LinkedList<T>::backward()
 {
-	if (current != head->get_next()) // If current is not head's next node
-		current = current->get_prev(); // Move current to the previous node
+	if (current != head && current->get_prev() != head) // If current is not head's next node
+		current = current->get_prev();										// Move current to the previous node
 }
 
 // Return the count of the number of nodes in the list, excluding sentinels
